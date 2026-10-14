@@ -34,7 +34,7 @@ Visit `http://localhost:3000`. Without environment variables you can search/filt
 5. Restart the app (public variables are embedded at build time), create an account, confirm your email, and sign in.
 6. Save a profile, then upload a short permitted clip. A second signed-in user should see the clip but cannot modify the first user's profile or delete their video.
 
-Use `npm run build` and `npm start` for a production server. This app uses browser-side Supabase Auth/data access; it does not implement server-rendered authenticated pages. Database/storage policies enforce authorization independently of the interface.
+Use `npm run build` and deploy the generated `out/` directory on an HTTPS static host. `next start` is not used for static exports. This app uses browser-side Supabase Auth/data access; it does not implement server-rendered authenticated pages. Database/storage policies enforce authorization independently of the interface.
 
 ## Verification
 
@@ -69,3 +69,12 @@ Before public launch, add content moderation, abuse controls, backup/retention p
 - [Next.js App Router](https://nextjs.org/docs/app)
 - [Supabase Auth](https://supabase.com/docs/guides/auth)
 - [Supabase Storage access control](https://supabase.com/docs/guides/storage/security/access-control)
+
+
+## Hosted private preview and build security
+
+Open https://crossplay-hub-mawubey.zany-llama-7991.chatgpt.site for an owner-private preview. It currently runs in read-only demo mode because no Supabase project has been configured. This is not a public internship demo or a live community.
+
+The application exports static Next.js pages into out/. Supabase browser Auth and RLS-protected data calls work from that frontend after a project is configured. Static hosting provides response headers; Next.js server header configuration does not apply to exported pages.
+
+A build-time check rejects secret/service-role keys in NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY before bundling. Supabase's client dependency is pinned to the tested installed version. Four configuration tests supplement the original 21 application/database tests, for 25 tests total.

@@ -7,10 +7,10 @@
     "build": "next build --webpack",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run tests/models.test.ts tests/upload.test.ts && node --test tests/database.test.mjs"
+    "test": "vitest run tests/models.test.ts tests/upload.test.ts tests/build-config.test.ts && node --test tests/database.test.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.0.0",
+    "@supabase/supabase-js": "2.117.3",
     "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
